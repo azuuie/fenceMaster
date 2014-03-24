@@ -51,6 +51,7 @@ public class judge
 	//This algorithm runs a Coloured DFS which is based on the concept of pre and post vertex ordering. 
 	public void detectCycleTripod(gameBoard board, player x)
 	{
+		System.out.println("-----PLAYER: " + x.type + "----------");
 		//Make sure each piece is white before we start the check
 		//Start the algorithm. This will run for each piece on the board beloning to x hence is O(2V) for the two passes here.
 		for(int i=0; i<board.numRows; i++)
@@ -58,8 +59,9 @@ public class judge
 			int jmax = (board.numRows - Math.abs(board.boardSize - 1 - i));
 			for (int j=0; j<jmax; j++)
 			{
-				gameBoard.getPiece(i,j).colour = "white";
-				gameBoard.getPiece(i,j).predecessor = null;
+				piece u = board.getPiece(i,j);
+				u.colour = "white";
+				u.predecessor = null;
 			}
 		}
 
@@ -68,24 +70,16 @@ public class judge
 			int jmax = (board.numRows - Math.abs(board.boardSize - 1 - i));
 			for (int j=0; j<jmax; j++)
 			{
-				piece u = gameBoard.getPiece(i,j);
+				piece u = board.getPiece(i,j);
+				System.out.println("-----PIECE: " + u.i + u.j + "----------");
 				if(u.colour == "white" && u.type == x.type)
 				{
-					//Do a tripod check simultaneously
-					String edge = v.classifyEdge(board, board.numRows, jmax);
-					if(!(x.touchedEdges.contains(edge)) && edge != "None")
-					{
-						x.touchedEdges.add(edge);
-						if(x.touchedEdges.size() >= 3)
-						{
-							System.out.println("WE HAVE A TRIPOD");
-							x.tripod = true;
-							return; //Force termination	
-						}
-					}
-
 					//Otherwise if we didn't terminate in the previous step, continue looking for a loop.
 					visitNode(board, u, x, jmax);
+					if(x.loop == true)
+					{
+						return;
+					}
 				}
 			}
 		}
@@ -94,12 +88,26 @@ public class judge
 	public void visitNode(gameBoard board, piece u, player x, int jmax)
 	{
 		u.colour = "gray";
-		ArrayList<piece> neighours = u.getNeighbours(board, board.numRows, jmax);
+		ArrayList<piece> neighbours = u.getNeighbours(board, board.numRows, jmax);
+
+		//Do a tripod check simultaneously
+		String edge = classifyEdge(u, board.numRows, jmax);
+		if(!(x.touchedEdges.contains(edge)) && edge != "None")
+		{
+			x.touchedEdges.add(edge);
+			if(x.touchedEdges.size() >= 3)
+			{
+				System.out.println("WE HAVE A TRIPOD");
+				x.tripod = true;
+				return; //Force termination	
+			}
+		}
 
 		for(piece v : neighbours)
-		{
-			if(v.colour == "gray" && v.predecessor != u)
+		{	
+			if(v.colour == "gray" && u.predecessor != v && u.predecessor.predecessor != v)
 			{
+				System.out.println("-----CONNECTED TO: " + v.i + v.j + "----------");
 				System.out.println("WE HAVE A LOOP!");
 				x.loop = true;
 				return;
@@ -107,8 +115,9 @@ public class judge
 
 			if(v.colour == "white")
 			{
+				System.out.println("-----VISITING: " + v.i + v.j + "----------");
 				v.predecessor = u;
-				visitNode(v);
+				visitNode(board, v, x, jmax);
 			}
 
 			u.colour = "black";
@@ -118,17 +127,9 @@ public class judge
 	public char whoWon(gameBoard board, player w, player b) 
 	{
 		//These methods modify the given player states
-		System.out.println("\n=========LOOKIN FOR WHITE TRIPOD===========");
-		searchTripod(board, w);
-
-		System.out.println("\n=========LOOKIN FOR WHITE LOOP===========");
-		searchLoop(board, w);
-
-		System.out.println("\n=========LOOKIN FOR BLACK TRIPOD===========");
-		searchTripod(board, b);
-
-		System.out.println("\n=========LOOKIN FOR BLACK LOOP===========");
-		searchLoop(board, b);
+		System.out.println("\n=========LOOKIN FOR A WEINER===========");
+		detectCycleTripod(board, w);
+		detectCycleTripod(board, b);
 
 		//Conditions for when White wins with a tripod
 		if(w.tripod == true && (b.tripod == false && b.loop == false))

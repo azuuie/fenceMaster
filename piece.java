@@ -6,7 +6,7 @@ public class piece
 	public int i;
 	public int j;
 	public char type;
-	public int colour;
+	public String colour;
 	public boolean visited;
 	public piece predecessor;
 
@@ -30,24 +30,24 @@ public class piece
 		{
 			if(j>0 && j<jmax-1)
 			{
-				add(gameBoard, visited, stack, result, i+1, j);
-				add(gameBoard, visited, stack, result, i+1, j+1);
-				add(gameBoard, visited, stack, result, i, j-1);
-				add(gameBoard, visited, stack, result, i, j+1);
+				add(gameBoard, result, i+1, j);
+				add(gameBoard, result, i+1, j+1);
+				add(gameBoard, result, i, j-1);
+				add(gameBoard, result, i, j+1);
 			}
 
 			else if(j==0)
 			{
-				add(gameBoard, visited, stack, result, i+1, j);
-				add(gameBoard, visited, stack, result, i+1, j+1);
-				add(gameBoard, visited, stack, result, i, j+1);
+				add(gameBoard, result, i+1, j);
+				add(gameBoard, result, i+1, j+1);
+				add(gameBoard, result, i, j+1);
 			}
 
 			else if(j==jmax-1)
 			{
-				add(gameBoard, visited, stack, result, i+1, j-1);
-				add(gameBoard, visited, stack, result, i+1, j+1);
-				add(gameBoard, visited, stack, result, i, j-1);	
+				add(gameBoard, result, i+1, j-1);
+				add(gameBoard, result, i+1, j+1);
+				add(gameBoard, result, i, j-1);	
 			}
 		}
 
@@ -55,28 +55,28 @@ public class piece
 		{
 			if(j>0 && j<jmax-1)
 			{
-				add(gameBoard, visited, stack, result, i-1, j-1);
-				add(gameBoard, visited, stack, result, i+1, j+1);
-				add(gameBoard, visited, stack, result, i, j-1);
-				add(gameBoard, visited, stack, result, i, j+1);
-				add(gameBoard, visited, stack, result, i+1, j);
-				add(gameBoard, visited, stack, result, i-1, j);
+				add(gameBoard, result, i-1, j-1);
+				add(gameBoard, result, i+1, j+1);
+				add(gameBoard, result, i, j-1);
+				add(gameBoard, result, i, j+1);
+				add(gameBoard, result, i+1, j);
+				add(gameBoard, result, i-1, j);
 			}
 
 			else if(j==jmax-1)
 			{
-				add(gameBoard, visited, stack, result, i+1, j+1);
-				add(gameBoard, visited, stack, result, i-1, j-1);
-				add(gameBoard, visited, stack, result, i, j-1);
-				add(gameBoard, visited, stack, result, i+1, j);
+				add(gameBoard, result, i+1, j+1);
+				add(gameBoard, result, i-1, j-1);
+				add(gameBoard, result, i, j-1);
+				add(gameBoard, result, i+1, j);
 			}
 
 			else if(j==0)
 			{
-				add(gameBoard, visited, stack, result, i+1, j);
-				add(gameBoard, visited, stack, result, i-1, j);
-				add(gameBoard, visited, stack, result, i, j+1);
-				add(gameBoard, visited, stack, result, i+1, j+1);
+				add(gameBoard, result, i+1, j);
+				add(gameBoard, result, i-1, j);
+				add(gameBoard, result, i, j+1);
+				add(gameBoard, result, i+1, j+1);
 			}
 		}
 
@@ -84,26 +84,26 @@ public class piece
 		{
 			if(j>0 && j<jmax-1)
 			{
-				add(gameBoard, visited, stack, result, i-1, j-1);
-				add(gameBoard, visited, stack, result, i+1, j);
-				add(gameBoard, visited, stack, result, i, j+1);
-				add(gameBoard, visited, stack, result, i, j-1);
-				add(gameBoard, visited, stack, result, i-1, j);
-				add(gameBoard, visited, stack, result, i+1, j-1);
+				add(gameBoard, result, i-1, j-1);
+				add(gameBoard, result, i+1, j);
+				add(gameBoard, result, i, j+1);
+				add(gameBoard, result, i, j-1);
+				add(gameBoard, result, i-1, j);
+				add(gameBoard, result, i+1, j-1);
 			}
 
 			if(j==0)
 			{
-				add(gameBoard, visited, stack, result, i, j+1);
-				add(gameBoard, visited, stack, result, i-1, j-1);
-				add(gameBoard, visited, stack, result, i+1, j-1);
+				add(gameBoard, result, i, j+1);
+				add(gameBoard, result, i-1, j-1);
+				add(gameBoard, result, i+1, j-1);
 			}
 
 			if(j==jmax-1)
 			{
-				add(gameBoard, visited, stack, result, i-1, j-1);
-				add(gameBoard, visited, stack, result, i+1, j-1);
-				add(gameBoard, visited, stack, result, i, j-1);
+				add(gameBoard, result, i-1, j-1);
+				add(gameBoard, result, i+1, j-1);
+				add(gameBoard, result, i, j-1);
 			}
 		}
 		
@@ -112,28 +112,28 @@ public class piece
 
 			if(j>0 && j<jmax-1)
 			{
-				add(gameBoard, visited, stack, result, i, j-1);
-				add(gameBoard, visited, stack, result, i, j+1);
-				add(gameBoard, visited, stack, result, i-1, j);
-				add(gameBoard, visited, stack, result, i+1, j);
-				add(gameBoard, visited, stack, result, i-1, j+1);
-				add(gameBoard, visited, stack, result, i+1, j-1);
+				add(gameBoard, result, i, j-1);
+				add(gameBoard, result, i, j+1);
+				add(gameBoard, result, i-1, j);
+				add(gameBoard, result, i+1, j);
+				add(gameBoard, result, i-1, j+1);
+				add(gameBoard, result, i+1, j-1);
 			}
 
 			else if(j==0)
 			{
-				add(gameBoard, visited, stack, result, i-1, j);
-				add(gameBoard, visited, stack, result, i+1, j);
-				add(gameBoard, visited, stack, result, i+1, j+1);
-				add(gameBoard, visited, stack, result, i, j+1);
+				add(gameBoard, result, i-1, j);
+				add(gameBoard, result, i+1, j);
+				add(gameBoard, result, i+1, j+1);
+				add(gameBoard, result, i, j+1);
 			}
 
 			else if(j==jmax-1)
 			{
-				add(gameBoard, visited, stack, result, i-1, j+1);
-				add(gameBoard, visited, stack, result, i+1, j-1);
-				add(gameBoard, visited, stack, result, i-1, j);
-				add(gameBoard, visited, stack, result, i, j-1);
+				add(gameBoard, result, i-1, j+1);
+				add(gameBoard, result, i+1, j-1);
+				add(gameBoard, result, i-1, j);
+				add(gameBoard, result, i, j-1);
 			}
 		}
 
@@ -141,24 +141,24 @@ public class piece
 		{
 			if(j>0 && j<jmax-1)
 			{ 
-				add(gameBoard, visited, stack, result, i, j+1);
-				add(gameBoard, visited, stack, result, i, j-1);
-				add(gameBoard, visited, stack, result, i-1, j);
-				add(gameBoard, visited, stack, result, i-1, j+1);
+				add(gameBoard, result, i, j+1);
+				add(gameBoard, result, i, j-1);
+				add(gameBoard, result, i-1, j);
+				add(gameBoard, result, i-1, j+1);
 			}
 
 			else if(j==0)
 			{
-				add(gameBoard, visited, stack, result, i-1, j);
-				add(gameBoard, visited, stack, result, i, j+1);
-				add(gameBoard, visited, stack, result, i-1, j+1);
+				add(gameBoard, result, i-1, j);
+				add(gameBoard, result, i, j+1);
+				add(gameBoard, result, i-1, j+1);
 			}
 
 			else if(j==jmax-1)
 			{
-				add(gameBoard, visited, stack, result, i-1, j+1);
-				add(gameBoard, visited, stack, result, i-1, j-1);
-				add(gameBoard, visited, stack, result, i-1, j+1);
+				add(gameBoard, result, i-1, j+1);
+				add(gameBoard, result, i-1, j-1);
+				add(gameBoard, result, i-1, j+1);
 			}
 		}
 
@@ -172,6 +172,7 @@ public class piece
 			piece tmp = gameBoard.getPiece(i,j);
 			System.out.println("\n N at: " + i + "," + j);
 			result.add(tmp);
+		}
 	}
 
 	public boolean isSameType(char element)
