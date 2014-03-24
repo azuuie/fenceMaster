@@ -1,0 +1,353 @@
+// 	//Used by Tripod search
+	// public List<int[]> checkForNeighbours(char[][] gameBoard, List<int[]> visited, List<int[]> stack, int numRows, int jmax)
+	// {
+	// 	List<int[]> result = new ArrayList<int[]>();
+	// 	int i = curr[0];
+	// 	int j = curr[1];
+
+	// 	//This function checks all positions around the current piece (i,j) and returns a list of valid unvisited neighbours. 
+	// 	//There are three main conditions for our current piece
+	// 	if(i==0)
+	// 	{
+	// 		if(j>0 && j<jmax-1)
+	// 		{
+	// 			add(gameBoard, visited, stack, result, i+1, j);
+	// 			add(gameBoard, visited, stack, result, i+1, j+1);
+	// 			add(gameBoard, visited, stack, result, i, j-1);
+	// 			add(gameBoard, visited, stack, result, i, j+1);
+	// 		}
+
+	// 		else if(j==0)
+	// 		{
+	// 			add(gameBoard, visited, stack, result, i+1, j);
+	// 			add(gameBoard, visited, stack, result, i+1, j+1);
+	// 			add(gameBoard, visited, stack, result, i, j+1);
+	// 		}
+
+	// 		else if(j==jmax-1)
+	// 		{
+	// 			add(gameBoard, visited, stack, result, i+1, j-1);
+	// 			add(gameBoard, visited, stack, result, i+1, j+1);
+	// 			add(gameBoard, visited, stack, result, i, j-1);	
+	// 		}
+	// 	}
+
+	// 	else if(i>0 && i<numRows/2)
+	// 	{
+	// 		if(j>0 && j<jmax-1)
+	// 		{
+	// 			add(gameBoard, visited, stack, result, i-1, j-1);
+	// 			add(gameBoard, visited, stack, result, i+1, j+1);
+	// 			add(gameBoard, visited, stack, result, i, j-1);
+	// 			add(gameBoard, visited, stack, result, i, j+1);
+	// 			add(gameBoard, visited, stack, result, i+1, j);
+	// 			add(gameBoard, visited, stack, result, i-1, j);
+	// 		}
+
+	// 		else if(j==jmax-1)
+	// 		{
+	// 			add(gameBoard, visited, stack, result, i+1, j+1);
+	// 			add(gameBoard, visited, stack, result, i-1, j-1);
+	// 			add(gameBoard, visited, stack, result, i, j-1);
+	// 			add(gameBoard, visited, stack, result, i+1, j);
+	// 		}
+
+	// 		else if(j==0)
+	// 		{
+	// 			add(gameBoard, visited, stack, result, i+1, j);
+	// 			add(gameBoard, visited, stack, result, i-1, j);
+	// 			add(gameBoard, visited, stack, result, i, j+1);
+	// 			add(gameBoard, visited, stack, result, i+1, j+1);
+	// 		}
+	// 	}
+
+	// 	else if(i==numRows/2)
+	// 	{
+	// 		if(j>0 && j<jmax-1)
+	// 		{
+	// 			add(gameBoard, visited, stack, result, i-1, j-1);
+	// 			add(gameBoard, visited, stack, result, i+1, j);
+	// 			add(gameBoard, visited, stack, result, i, j+1);
+	// 			add(gameBoard, visited, stack, result, i, j-1);
+	// 			add(gameBoard, visited, stack, result, i-1, j);
+	// 			add(gameBoard, visited, stack, result, i+1, j-1);
+	// 		}
+
+	// 		if(j==0)
+	// 		{
+	// 			add(gameBoard, visited, stack, result, i, j+1);
+	// 			add(gameBoard, visited, stack, result, i-1, j-1);
+	// 			add(gameBoard, visited, stack, result, i+1, j-1);
+	// 		}
+
+	// 		if(j==jmax-1)
+	// 		{
+	// 			add(gameBoard, visited, stack, result, i-1, j-1);
+	// 			add(gameBoard, visited, stack, result, i+1, j-1);
+	// 			add(gameBoard, visited, stack, result, i, j-1);
+	// 		}
+	// 	}
+		
+	// 	else if(i>numRows/2 && i<numRows-1)
+	// 	{
+	// 		if(j>0 && j<jmax-1)
+	// 		{
+	// 			add(gameBoard, visited, stack, result, i, j-1);
+	// 			add(gameBoard, visited, stack, result, i, j+1);
+	// 			add(gameBoard, visited, stack, result, i-1, j);
+	// 			add(gameBoard, visited, stack, result, i+1, j);
+	// 			add(gameBoard, visited, stack, result, i-1, j+1);
+	// 			add(gameBoard, visited, stack, result, i+1, j-1);
+	// 		}
+
+	// 		else if(j==0)
+	// 		{
+	// 			add(gameBoard, visited, stack, result, i-1, j);
+	// 			add(gameBoard, visited, stack, result, i+1, j);
+	// 			add(gameBoard, visited, stack, result, i+1, j+1);
+	// 			add(gameBoard, visited, stack, result, i, j+1);
+	// 		}
+
+	// 		else if(j==jmax-1)
+	// 		{
+	// 			add(gameBoard, visited, stack, result, i-1, j+1);
+	// 			add(gameBoard, visited, stack, result, i+1, j-1);
+	// 			add(gameBoard, visited, stack, result, i-1, j);
+	// 			add(gameBoard, visited, stack, result, i, j-1);
+	// 		}
+	// 	}
+
+	// 	else if(i==numRows-1)
+	// 	{
+	// 		if(j>0 && j<jmax-1)
+	// 		{ 
+	// 			add(gameBoard, visited, stack, result, i, j+1);
+	// 			add(gameBoard, visited, stack, result, i, j-1);
+	// 			add(gameBoard, visited, stack, result, i-1, j);
+	// 			add(gameBoard, visited, stack, result, i-1, j+1);
+	// 		}
+
+	// 		else if(j==0)
+	// 		{
+	// 			add(gameBoard, visited, stack, result, i-1, j);
+	// 			add(gameBoard, visited, stack, result, i, j+1);
+	// 			add(gameBoard, visited, stack, result, i-1, j+1);
+	// 		}
+
+	// 		else if(j==jmax-1)
+	// 		{
+	// 			add(gameBoard, visited, stack, result, i-1, j+1);
+	// 			add(gameBoard, visited, stack, result, i-1, j-1);
+	// 			add(gameBoard, visited, stack, result, i-1, j+1);
+	// 		}
+	// 	}
+
+	// 	return result;
+	// }
+
+	// //Used by Loop search
+	// public List<int[]> checkForNeighbours(char[][] gameBoard, int[] start, List<int[]> visited, List<int[]> stack, int[] curr, int numRows, int jmax, int count)
+	// {
+	// 	List<int[]> result = new ArrayList<int[]>();
+	// 	int i = curr[0];
+	// 	int j = curr[1];
+
+	// 	//This function checks all positions around the current piece (i,j) and returns a list of valid unvisited neighbours. 
+	// 	//There are three main conditions for our current piece
+	// 	if(i==0)
+	// 	{
+	// 		if(j>0 && j<jmax-1)
+	// 		{
+	// 			add(gameBoard, start, visited, stack, result, i+1, j, count);
+	// 			add(gameBoard, start, visited, stack, result, i+1, j+1, count);
+	// 			add(gameBoard, start, visited, stack, result, i, j-1, count);
+	// 			add(gameBoard, start, visited, stack, result, i, j+1, count);
+	// 		}
+
+	// 		else if(j==0)
+	// 		{
+	// 			add(gameBoard, start, visited, stack, result, i+1, j, count);
+	// 			add(gameBoard, start, visited, stack, result, i+1, j+1, count);
+	// 			add(gameBoard, start, visited, stack, result, i, j+1, count);
+	// 		}
+
+	// 		else if(j==jmax-1)
+	// 		{
+	// 			add(gameBoard, start, visited, stack, result, i+1, j-1, count);
+	// 			add(gameBoard, start, visited, stack, result, i+1, j+1, count);
+	// 			add(gameBoard, start, visited, stack, result, i, j-1, count);	
+	// 		}
+	// 	}
+
+	// 	else if(i>0 && i<numRows/2)
+	// 	{
+	// 		if(j>0 && j<jmax-1)
+	// 		{
+	// 			add(gameBoard, start, visited, stack, result, i-1, j-1, count);
+	// 			add(gameBoard, start, visited, stack, result, i+1, j+1, count);
+	// 			add(gameBoard, start, visited, stack, result, i, j-1, count);
+	// 			add(gameBoard, start, visited, stack, result, i, j+1, count);
+	// 			add(gameBoard, start, visited, stack, result, i+1, j, count);
+	// 			add(gameBoard, start, visited, stack, result, i-1, j, count);
+	// 		}
+
+	// 		else if(j==jmax-1)
+	// 		{
+	// 			add(gameBoard, start, visited, stack, result, i+1, j+1, count);
+	// 			add(gameBoard, start, visited, stack, result, i-1, j-1, count);
+	// 			add(gameBoard, start, visited, stack, result, i, j-1, count);
+	// 			add(gameBoard, start, visited, stack, result, i+1, j, count);
+	// 		}
+
+	// 		else if(j==0)
+	// 		{
+	// 			add(gameBoard, start, visited, stack, result, i+1, j, count);
+	// 			add(gameBoard, start, visited, stack, result, i-1, j, count);
+	// 			add(gameBoard, start, visited, stack, result, i, j+1, count);
+	// 			add(gameBoard, start, visited, stack, result, i+1, j+1, count);
+	// 		}
+	// 	}
+
+	// 	else if(i==numRows/2)
+	// 	{
+	// 		if(j>0 && j<jmax-1)
+	// 		{
+	// 			add(gameBoard, start, visited, stack, result, i-1, j-1, count);
+	// 			add(gameBoard, start, visited, stack, result, i+1, j, count);
+	// 			add(gameBoard, start, visited, stack, result, i, j+1, count);
+	// 			add(gameBoard, start, visited, stack, result, i, j-1, count);
+	// 			add(gameBoard, start, visited, stack, result, i-1, j, count);
+	// 			add(gameBoard, start, visited, stack, result, i+1, j-1, count);
+	// 		}
+
+	// 		if(j==0)
+	// 		{
+	// 			add(gameBoard, start, visited, stack, result, i, j+1, count);
+	// 			add(gameBoard, start, visited, stack, result, i-1, j-1, count);
+	// 			add(gameBoard, start, visited, stack, result, i+1, j-1, count);
+	// 		}
+
+	// 		if(j==jmax-1)
+	// 		{
+	// 			add(gameBoard, start, visited, stack, result, i-1, j-1, count);
+	// 			add(gameBoard, start, visited, stack, result, i+1, j-1, count);
+	// 			add(gameBoard, start, visited, stack, result, i, j-1, count);
+	// 		}
+	// 	}
+		
+	// 	else if(i>numRows/2 && i<numRows-1)
+	// 	{
+	// 		if(j>0 && j<jmax-1)
+	// 		{
+	// 			add(gameBoard, start, visited, stack, result, i, j-1, count);
+	// 			add(gameBoard, start, visited, stack, result, i, j+1, count);
+	// 			add(gameBoard, start, visited, stack, result, i-1, j, count);
+	// 			add(gameBoard, start, visited, stack, result, i+1, j, count);
+	// 			add(gameBoard, start, visited, stack, result, i-1, j+1, count);
+	// 			add(gameBoard, start, visited, stack, result, i+1, j-1, count);
+	// 		}
+
+	// 		else if(j==0)
+	// 		{
+	// 			add(gameBoard, start, visited, stack, result, i-1, j, count);
+	// 			add(gameBoard, start, visited, stack, result, i+1, j, count);
+	// 			add(gameBoard, start, visited, stack, result, i+1, j+1, count);
+	// 			add(gameBoard, start, visited, stack, result, i, j+1, count);
+	// 		}
+
+	// 		else if(j==jmax-1)
+	// 		{
+	// 			add(gameBoard, start, visited, stack, result, i-1, j+1, count);
+	// 			add(gameBoard, start, visited, stack, result, i+1, j-1, count);
+	// 			add(gameBoard, start, visited, stack, result, i-1, j, count);
+	// 			add(gameBoard, start, visited, stack, result, i, j-1, count);
+	// 		}
+	// 	}
+
+	// 	else if(i==numRows-1)
+	// 	{
+	// 		if(j>0 && j<jmax-1)
+	// 		{ 
+	// 			add(gameBoard, start, visited, stack, result, i, j+1, count);
+	// 			add(gameBoard, start, visited, stack, result, i, j-1, count);
+	// 			add(gameBoard, start, visited, stack, result, i-1, j, count);
+	// 			add(gameBoard, start, visited, stack, result, i-1, j+1, count);
+	// 		}
+
+	// 		else if(j==0)
+	// 		{
+	// 			add(gameBoard, start, visited, stack, result, i-1, j, count);
+	// 			add(gameBoard, start, visited, stack, result, i, j+1, count);
+	// 			add(gameBoard, start, visited, stack, result, i-1, j+1, count);
+	// 		}
+
+	// 		else if(j==jmax-1)
+	// 		{
+	// 			add(gameBoard, start, visited, stack, result, i-1, j+1, count);
+	// 			add(gameBoard, start, visited, stack, result, i-1, j-1, count);
+	// 			add(gameBoard, start, visited, stack, result, i-1, j+1, count);
+	// 		}
+	// 	}
+
+	// 	return result;
+	// }
+
+	// //Used by loop search
+	// public void add(char[][] gameBoard, int[] start, List<int[]> visited, List<int[]> stack, List<int[]> result, int i, int j, int count)
+	// {	
+	// 	if(isSameType(gameBoard[i][j]))
+	// 	{
+	// 		int[] tmp = {i, j};
+
+	// 		if(!contains(visited, tmp) && !contains(stack, tmp))
+	// 		{
+	// 			System.out.println("\n N at: " + i + "," + j);
+	// 			result.add(tmp);
+	// 		}
+
+	// 		if(Arrays.equals(tmp, start) && count > 1)
+	// 		{
+	// 			System.out.println("\n N at: " + i + "," + j);
+	// 			result.add(tmp);
+	// 		}
+	// 	}
+	// }
+
+	// //Used by tripod search
+	// public void add(char[][] gameBoard, List<int[]> visited, List<int[]> stack, List<int[]> result, int i, int j)
+	// {	
+	// 	if(isSameType(gameBoard[i][j]))
+	// 	{
+	// 		int[] tmp = {i, j};
+	// 		if(!contains(visited, tmp) && !contains(stack, tmp))
+	// 		{
+	// 			System.out.println("\n N at: " + i + "," + j);
+	// 			result.add(tmp);
+	// 		}
+	// 	}
+	// }
+
+	// public boolean contains(List<int[]> list, int[] item)
+	// {
+	// 	for(int i=0; i<list.size(); i++)
+	// 	{
+	// 		if( Arrays.equals(list.get(i), item) )
+	// 		{
+	// 			return true;
+	// 		}
+	// 	}
+	// 	return false;
+	// }
+
+	// public boolean isSameType(char element)
+	// {
+	// 	if(type == element)
+	// 	{
+	// 		return true;
+	// 	}
+
+	// 	else
+	// 	{
+	// 		return false;
+	// 	}
+	// }
