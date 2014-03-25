@@ -88,7 +88,7 @@ public class judge
 	public void visitNode(gameBoard board, piece u, player x, int jmax)
 	{
 		u.colour = "gray";
-		ArrayList<piece> neighbours = u.getNeighbours(board, board.numRows, jmax);
+		List<piece> neighbours = u.getNeighbours(board);
 
 		//Do a tripod check simultaneously
 		String edge = classifyEdge(u, board.numRows, jmax);
