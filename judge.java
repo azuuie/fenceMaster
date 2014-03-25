@@ -105,12 +105,15 @@ public class judge
 
 		for(piece v : neighbours)
 		{	
-			if(v.colour == "gray" && u.predecessor != v && u.predecessor.predecessor != v)
+			if(v.colour == "gray" && u.predecessor != v)
 			{
-				System.out.println("-----CONNECTED TO: " + v.i + v.j + "----------");
-				System.out.println("WE HAVE A LOOP!");
-				x.loop = true;
-				return;
+				if(validLoop(loops))
+				{
+					System.out.println("-----CONNECTED TO: " + v.i + v.j + "----------");
+					System.out.println("WE HAVE A LOOP!");
+					x.loop = true;
+					return;
+				}
 			}
 
 			if(v.colour == "white")
@@ -190,5 +193,10 @@ public class judge
 		{
 			return "Loop and Tripod";
 		}
+	}
+
+	public boolean validLoop(...)
+	{
+
 	}
 }
