@@ -1,10 +1,17 @@
-import java.io.*;
+import java.io.File;
+import java.io.IOException;
+import java.io.FileNotFoundException;
+import java.util.Scanner;
 
 public class fenceMaster
 {
-	public static void main(String[] args) throws IOException 
+	public static void main(String[] args)
 	{
 
+		char[] charArray = null;
+		int boardSize = 0;
+		char charBoard[][] = null;
+		
 		//Check command line parameter is valid
 		if(args.length != 1) 
 		{
@@ -14,60 +21,80 @@ public class fenceMaster
 
 		//Read file line by line and store into a multidimentional array. This will a parameter into the main algorithm.
 		String infile = "./" + args[0];
-		FileReader fr = new FileReader(infile); 
-		BufferedReader br = new BufferedReader(fr);
-
-		String line;
-		char[] charArray;
-		//Extract board size from first line and create a game board with the an appropriate amount of rows
-		line = br.readLine();
-		int boardSize = Integer.parseInt(line);
-		char charBoard[][] = new char[2*boardSize-1][];
-
-		//Go through each row of the given board, take input as a string, remove all white space, convert to charArray and store in the corresponding row
-		for(int i=0; i<2*boardSize-1; i++) 
+		System.in.
+		
+		try
 		{
-			line = br.readLine();
-    		line = line.trim();
-    		line = line.replaceAll("\\s+","");
-    		charArray = line.toCharArray();
-    		charBoard[i] = charArray;
-		} 
+			String line = "";
+			int index = 0;
+			File file = new File(infile);
+			Scanner scan = new Scanner(file);
 
-		fr.close();
-		br.close();
+			if(scan.hasNextLine())
+			{
+				line = scan.nextLine();
+				boardSize = Integer.parseInt(line);
+				charBoard = new char[2*boardSize-1][];
+			}
+
+			while(scan.hasNextLine())
+			{
+				line = scan.nextLine();
+				line = line.trim();
+				line = line.replaceAll("\\s+","");
+				charArray = line.toCharArray();
+				charBoard[index] = charArray;
+				index++;
+			} scan.close();
+		}
+
+		catch(IOException e) 
+		{
+			System.out.println("\nFile not found or incomplete board!");
+			System.out.println("Make sure file is in the root of the compile directory and is correcly formatted");
+			e.printStackTrace();
+			System.exit(1);
+		}
 
 		//Setup the game board using objects and remove reference to the charBoard
 		//Call function whoWon(gameBoard) which returns a character (B - black, W - white, D - draw or N - none);
 		player white = new player('W');
 		player black = new player('B');
+		
+		//Create the board as an obeject with object pieces
 		gameBoard newBoard = new gameBoard(boardSize);
-		newBoard.initBoard(charBoard);
+		newBoard.initBoard(charBoard, black, white);
+
+		//Initialise each players hash map of pieces
+		black.createHashMap(newBoard);
+		white.createHashMap(newBoard);
+
+		//Create the judge object to make 
 		judge judge = new judge();
-		newBoard.printBoard();
+		//newBoard.printBoard();
 		char winner = judge.whoWon(newBoard, white, black);
 
 		switch(winner)
 		{
 			case 'W':
-				System.out.println("\n\nWhite is the winner! However, to avoid being labelled as 'racist', Black recieves an honourable mention.");
-				System.out.println("White made a " + judge.winType(white));
+				System.out.println("White");
+				System.out.println(judge.winType(white));
 				break;
 
 			case 'B':
-				System.out.println("\n\nBlack is the winner! White wins nothing! Lel.");
-				System.out.println("Black made a " + judge.winType(black));
+				System.out.println("Black");
+				System.out.println(judge.winType(black));
 				break;
 
 			case 'D':
-				System.out.println("\n\nIt's a draw! Everyone loves draws... said no one ever.");
-				System.out.println("White made a " + judge.winType(white));
-				System.out.println("Black made a " + judge.winType(black));
+				System.out.println("Draw");
+				System.out.println("Nil");
 				break;
 
 			case 'N':
-				System.out.println("\n\nNobody wins! What a shameful display this game has been...");
+				System.out.println("Draw");
+				System.out.println("Nil");
 				break;
 		}
- 	}
+	}
 }

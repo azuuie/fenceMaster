@@ -7,7 +7,7 @@ public class gameBoard
 	public int maxPieces;
 	public int boardSize;
 	public int numRows;
-	public List<List<piece>> board;
+	public ArrayList<ArrayList<piece>> board;
 
 	public gameBoard(int boardSize)
 	{
@@ -15,16 +15,16 @@ public class gameBoard
 		this.maxPieces = 9*boardSize + 16;
 		this.boardSize = boardSize;
 		this.numRows = 2*boardSize-1;
-		this.board = new List<List<piece>>();
+		this.board = new ArrayList<ArrayList<piece>>();
 	}
 
-	// This function will take the ascii board and create a piece object for each cell. The board structure is a 2D List<> object.
+	// This function will take the ascii board and create a piece object for each cell. The board structure is a 2D ArrayList<> object.
 	public void initBoard(char[][] charBoard, player b, player w)
 	{
 		for(int i=0; i<numRows; i++)
 		{
 			int jmax = (numRows - Math.abs(boardSize - 1 -i));
-			List<piece> rowPieces = new List<piece>();
+			ArrayList<piece> rowPieces = new ArrayList<piece>();
 
 			for (int j=0; j<jmax; j++)
 			{
@@ -89,6 +89,11 @@ public class gameBoard
 		{
 			return false;
 		}
+	}
+
+	public ArrayList<piece> getRow(int row)
+	{
+		return board.get(row);
 	}
 
 	public void clearBoard()

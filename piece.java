@@ -20,12 +20,13 @@ public class piece
 	}
 
 	//Used by Tripod search
-	public List<piece> getNeighbours(gameBoard board)
+	public ArrayList<piece> getNeighbours(gameBoard board)
 	{
-		List<piece> result = new List<piece>();
-		int jmax = (board.numRows - Math.abs(board.boardSize - 1 - i));
+		ArrayList<piece> result = new ArrayList<piece>();
+		int jmax = board.getRow(i).size();
+		int numRows = board.numRows;
 
-		//This function checks all positions around the current piece (i,j) and returns a list of valid unvisited neighbours. 
+		//This function checks all positions around the current piece (i,j) and returns a ArrayList of valid unvisited neighbours. 
 		//There are three main conditions for our current piece
 		if(i==0)
 		{
@@ -166,9 +167,8 @@ public class piece
 		return result;
 	}
 
-	public void add(gameBoard board, List<piece> result, int i, int j)
+	public void add(gameBoard board, ArrayList<piece> result, int i, int j)
 	{	
-		System.out.println("\n N at: " + i + "," + j);
 		result.add(board.getPiece(i,j));
 	}
 
