@@ -21,8 +21,6 @@ public class fenceMaster
 
 		//Read file line by line and store into a multidimentional array. This will a parameter into the main algorithm.
 		String infile = "./" + args[0];
-		System.in.
-		
 		try
 		{
 			String line = "";
