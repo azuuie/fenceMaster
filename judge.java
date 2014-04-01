@@ -1,10 +1,10 @@
-import java.lang.Math.*;
+package desposito.fenceMaster;
+
 import java.util.*;
 
-public class judge 
+public class Judge
  { 
- 	
-    public String classifyEdge(piece x, int numRows, int jmax)
+    public String classifyEdge(Piece x, int numRows, int jmax)
     {
 		//Top left edge
 		if(x.j==0 && (x.i<numRows/2 && x.i > 0))
@@ -49,21 +49,21 @@ public class judge
 	}
 
 	//This algorithm runs a Coloured DFS which is based on the concept of pre and post vertex ordering. 
-	public void detectCycleTripod(gameBoard board, player x)
+	public void detectCycleTripod(GameBoard board, Player x)
 	{
 		//System.out.println("-----PLAYER: " + x.type + "----------");
-		ArrayList<piece> path = new ArrayList<piece>();
+		ArrayList<Piece> path = new ArrayList<Piece>();
 
-		//Make sure each piece is white before we start the check
-		//Start the algorithm. This will run for each piece on the board beloning to x hence is O(2V) for the two passes here.
-		for(piece u : x.pieces.keySet())
+		//Make sure each Piece is white before we start the check
+		//Start the algorithm. This will run for each Piece on the board beloning to x hence is O(2V) for the two passes here.
+		for(Piece u : x.pieces.keySet())
 		{
 			u.colour = "white";
 			u.predecessor = null;
 		}
 
 		
-		for(piece u : x.pieces.keySet())
+		for(Piece u : x.pieces.keySet())
 		{
 			//System.out.println("-----PIECE: " + u.i + u.j + "----------");
 			if(u.colour == "white" && u.type == x.type)
@@ -77,11 +77,11 @@ public class judge
 		}
 	}
 
-	public void visitNode(gameBoard board, piece u, player x, ArrayList<piece> path)
+	public void visitNode(GameBoard board, Piece u, Player x, ArrayList<Piece> path)
 	{
 		path.add(u);
 		u.colour = "gray";
-		ArrayList<piece> neighbours = x.pieces.get(u);
+		ArrayList<Piece> neighbours = x.pieces.get(u);
 
 		//Do a tripod check simultaneously
 		String edge = classifyEdge(u, board.numRows, board.getRow(u.i).size());
@@ -98,7 +98,7 @@ public class judge
 			}
 		}
 
-		for(piece v : neighbours)
+		for(Piece v : neighbours)
 		{	
 			if(v.type == x.type)
 			{
@@ -107,14 +107,14 @@ public class judge
 				{
 					return;
 				}
-				//System.out.println("\n----At piece " + u.i + u.j + "-----");
+				//System.out.println("\n----At Piece " + u.i + u.j + "-----");
 				if(v.colour == "gray" && u.predecessor != v)
 				{
 					//System.out.println("CONNECTING!");
 					path.add(v);
-					piece startPiece = v;
+					Piece startPiece = v;
 
-					printLoop(path);
+					//printLoop(path);
 
 					if(validLoop(startPiece, path, x) == true)
 					{
@@ -141,56 +141,50 @@ public class judge
 		//System.out.println("(" + u.i + "," + u.j + ")" + " is now black");
 	}
 
-	public char whoWon(gameBoard board, player w, player b) 
+	public char whoWon(GameBoard board, Player w, Player b) 
 	{
-		//These methods modify the given player states
+		//These methods modify the given Player states
 		detectCycleTripod(board, w);
 		detectCycleTripod(board, b);
 
 		//Conditions for when White wins with a tripod
 		if(w.tripod == true && (b.tripod == false && b.loop == false))
 		{
-			char result = 'W';
-			return result;
+			return 'W';
 		}
 
 		//Conditions for when White wins with a Loop
 		else if(w.loop == true && (b.tripod == false && b.loop == false))
 		{
-			char result = 'W';
-			return result;
+			return 'W';
 		}
 
 		//Conditions for when Black wins with a tripod
 		if(b.tripod == true && (w.tripod == false && w.loop == false))
 		{
-			char result = 'B';
-			return result;
+			return 'B';
 		}
 
 		//Conditions for when Black wins with a Loop
 		else if(b.loop == true && (w.tripod == false && w.loop == false))
 		{
-			char result = 'B';
-			return result;
+			return 'B';
 		}
 
 		//Draw
 		else if((b.loop == true || b.tripod == true) && (w.tripod == true || w.loop == true))
 		{
-			char result = 'D';
-			return result;
+			return 'D';
 		}	
 
 		else
 		{	
-			char result = 'N';
 			return 'N';
 		}
 
 	}
 
-	public String winType(player x)
+	public String winType(Player x)
 	{
 		if(x.tripod && !x.loop)
 		{
@@ -209,15 +203,15 @@ public class judge
 	}
 
 	//This function extracts the loops from path.
-	//Works on the assumption that a loop is everything contained within the two occurances of each piece in loop
-	//For example, if the colouredDFS starts at (0,0) and returns to (0,0) with each visited piece being added to path
-	//Then a loop will be everything from the first occurance of (0,0) up to the next. 
-	public boolean validLoop(piece startPiece, ArrayList<piece> path, player x)
+	//Works on the assumption that a loop is everything contained within the two occurrences of each Piece in loop
+	//For example, if the colouredDFS starts at (0,0) and returns to (0,0) with each visited Piece being added to path
+	//Then a loop will be everything from the first occurrence of (0,0) up to the next. 
+	public boolean validLoop(Piece startPiece, ArrayList<Piece> path, Player x)
 	{
-		ArrayList<piece> tmp = new ArrayList<piece>();
+		ArrayList<Piece> tmp = new ArrayList<Piece>();
 		boolean startRecord = false;
 		
-		for(piece u : path)
+		for(Piece u : path)
 		{
 			if(u == startPiece)
 			{
@@ -231,7 +225,7 @@ public class judge
 		}
 
 		////System.out.println("REDUCED PATH: ");
-		printLoop(tmp);
+		//printLoop(tmp);
 
 		if(isSparse(tmp, x))
 		{
@@ -241,14 +235,14 @@ public class judge
 		return false;
 	}
 
-	public boolean isSparse(ArrayList<piece> loop, player x)
+	public boolean isSparse(ArrayList<Piece> loop, Player x)
 	{
 		int imax = -1;
 		int imin = 999;
 		int jmax = -1;
 		int jmin = 999;
 		
-		for(piece u : loop)
+		for(Piece u : loop)
 		{
 			if(u.i < imin)
 			{
@@ -271,11 +265,11 @@ public class judge
 			}
 		}
 
-		//Check if at least one non player type piece exists within the loop bounds.
-		for(piece u : loop)
+		//Check if at least one non Player type Piece exists within the loop bounds.
+		for(Piece u : loop)
 		{
-			ArrayList<piece> neighbours = x.pieces.get(u);
-			for(piece neighbour : neighbours)
+			ArrayList<Piece> neighbours = x.pieces.get(u);
+			for(Piece neighbour : neighbours)
 			{
 				if(neighbour.type != x.type)
 				{
@@ -294,11 +288,11 @@ public class judge
 		return false;
 	}
 
-	public void printLoop(ArrayList<piece> loop)
-	{
-		for(piece u : loop)
-		{
-			//System.out.println("(" + u.i + "," + u.j + ")");
-		}
-	}
+//	public void printLoop(ArrayList<Piece> loop)
+//	{
+//		for(Piece u : loop)
+//		{
+//			//System.out.println("(" + u.i + "," + u.j + ")");
+//		}
+//	}
 }

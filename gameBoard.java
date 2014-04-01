@@ -1,50 +1,51 @@
-import java.lang.Math.*;
+package desposito.fenceMaster;
+
 import java.util.*;
 
-public class gameBoard 
+public class GameBoard 
 {
 	public int numPieces;
 	public int maxPieces;
 	public int boardSize;
 	public int numRows;
-	public ArrayList<ArrayList<piece>> board;
+	public ArrayList<ArrayList<Piece>> board;
 
-	public gameBoard(int boardSize)
+	public GameBoard(int boardSize)
 	{
 		this.numPieces = 0;
 		this.maxPieces = 9*boardSize + 16;
 		this.boardSize = boardSize;
 		this.numRows = 2*boardSize-1;
-		this.board = new ArrayList<ArrayList<piece>>();
+		this.board = new ArrayList<ArrayList<Piece>>();
 	}
 
-	// This function will take the ascii board and create a piece object for each cell. The board structure is a 2D ArrayList<> object.
-	public void initBoard(char[][] charBoard, player b, player w)
+	// This function will take the ascii board and create a Piece object for each cell. The board structure is a 2D ArrayList<> object.
+	public void initBoard(char[][] charBoard, Player b, Player w)
 	{
 		for(int i=0; i<numRows; i++)
 		{
 			int jmax = (numRows - Math.abs(boardSize - 1 -i));
-			ArrayList<piece> rowPieces = new ArrayList<piece>();
+			ArrayList<Piece> rowPieces = new ArrayList<Piece>();
 
 			for (int j=0; j<jmax; j++)
 			{
 				if(charBoard[i][j] == 'W')
 				{
-					piece newWhite = new piece(i,j,'W');
+					Piece newWhite = new Piece(i,j,'W');
 					rowPieces.add(newWhite);
 					numPieces++;
 				}
 
 				else if (charBoard[i][j] == 'B')
 				{
-					piece newBlack = new piece(i,j,'B');
+					Piece newBlack = new Piece(i,j,'B');
 					rowPieces.add(newBlack);
 					numPieces++;
 				}
 
 				else
 				{
-					piece empty = new piece(i,j,'-');
+					Piece empty = new Piece(i,j,'-');
 					rowPieces.add(empty);
 				}
 			}
@@ -59,16 +60,16 @@ public class gameBoard
 	}
 
 
-	public piece getPiece(int i, int j)
+	public Piece getPiece(int i, int j)
 	{
 		return board.get(i).get(j);
 	}
 
-	public boolean setPosition(int i, int j, piece piece)
+	public boolean setPosition(int i, int j, Piece Piece)
 	{
 		if( numPieces <= maxPieces && isEmpty(i,j))
 		{
-			board.get(i).add(j, piece);
+			board.get(i).add(j, Piece);
 			return true;
 		}
 
@@ -91,7 +92,7 @@ public class gameBoard
 		}
 	}
 
-	public ArrayList<piece> getRow(int row)
+	public ArrayList<Piece> getRow(int row)
 	{
 		return board.get(row);
 	}

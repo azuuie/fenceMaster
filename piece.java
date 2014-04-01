@@ -1,16 +1,17 @@
-import java.lang.Math.*;
+package desposito.fenceMaster;
+
 import java.util.*;
 
-public class piece
+public class Piece
 {
 	public int i;
 	public int j;
 	public char type;
 	public String colour;
 	public boolean visited;
-	public piece predecessor;
+	public Piece predecessor;
 
-	public piece(int i, int j, char type)
+	public Piece(int i, int j, char type)
 	{
 		this.i = i;
 		this.j = j;
@@ -20,14 +21,14 @@ public class piece
 	}
 
 	//Used by Tripod search
-	public ArrayList<piece> getNeighbours(gameBoard board)
+	public ArrayList<Piece> getNeighbours(GameBoard board)
 	{
-		ArrayList<piece> result = new ArrayList<piece>();
+		ArrayList<Piece> result = new ArrayList<Piece>();
 		int jmax = board.getRow(i).size();
 		int numRows = board.numRows;
 
-		//This function checks all positions around the current piece (i,j) and returns a ArrayList of valid unvisited neighbours. 
-		//There are three main conditions for our current piece
+		//This function checks all positions around the current Piece (i,j) and returns a ArrayList of valid unvisited neighbours. 
+		//There are three main conditions for our current Piece
 		if(i==0)
 		{
 			if(j>0 && j<jmax-1)
@@ -167,7 +168,7 @@ public class piece
 		return result;
 	}
 
-	public void add(gameBoard board, ArrayList<piece> result, int i, int j)
+	public void add(GameBoard board, ArrayList<Piece> result, int i, int j)
 	{	
 		result.add(board.getPiece(i,j));
 	}
