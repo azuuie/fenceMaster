@@ -1,3 +1,8 @@
+/* 
+	Daniel Esposito, desposito, 358064
+	Tim Chan, Timyc
+*/
+
 package desposito.fenceMaster;
 
 import java.util.*;
