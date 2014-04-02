@@ -1,6 +1,6 @@
 /* 
 	Daniel Esposito, desposito, 358064
-	Tim Chan, Timyc
+	Tim Chan, Timyc 390303
 */
 
 package desposito.fenceMaster;
@@ -14,6 +14,9 @@ public class TestWin
 		char[] charArray = null;
 		int boardSize = 0;
 		char charBoard[][] = null;
+		int rowLength = 0;
+		int midLength = 0;
+		boolean pastMid = false;
 		
 		//Read file line by line and store into a multi-dimensional array. This will a parameter into the main algorithm.
 		Scanner fileScanner = new Scanner(System.in);
@@ -25,6 +28,8 @@ public class TestWin
 			line = fileScanner.nextLine();
 			boardSize = Integer.parseInt(line);
 			charBoard = new char[2*boardSize-1][];
+			rowLength = boardSize;
+			midLength = 2*boardSize-1;
 		}
 
 		while(fileScanner.hasNextLine())
@@ -32,6 +37,27 @@ public class TestWin
 			line = fileScanner.nextLine();
 			line = line.trim();
 			line = line.replaceAll("\\s+","");
+			if (line.length() != rowLength || line.length()<boardSize);
+			{
+				System.out.println("Length of a row or file is incorrect.");
+			}
+			if (pastMid == true)
+			{
+				rowLength--;
+			}
+			else
+			{
+				rowLength++;
+				if (rowLength == midLength)
+				{
+					pastMid = true;
+				}
+			}
+			if (line.matches("[BW-]*"));
+			else
+			{
+				System.out.println("There is an incorrect piece representation.");
+			}	
 			charArray = line.toCharArray();
 			charBoard[index] = charArray;
 			index++;
